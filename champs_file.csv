@@ -1,0 +1,74 @@
+guid;
+id_observation;
+pseudo_utilisateur;Prénom et nom ou pseudo de l’auteur de l’observation
+nom_sel;Nom saisi par l’auteur de l’observation
+nom_sel_nn;Numéro taxonomique du nom saisi (équivalent à cd_nom)
+nom_ret;Nom retenu correspondant au nom saisi
+nom_ret_nn;Numéro taxonomique du nom retenu (équivalent à cd_ref)
+cd_nom;
+nom_referentiel;
+certitude;Certitude de l’identification taxonomique, indiquée par l’auteur de l’observation ('à déterminer', 'douteux', 'certain') 
+pays;
+ce_zone_geo;Code insee de la commune
+zone_geo;Commune
+dept;Département 
+lieudit;
+station;
+milieu;Milieu saisi librement par l’auteur de l’observation
+latitude;
+longitude;
+altitude;
+geodatum;
+localisation_precision;Précision de la localisation ('0 à 10 m','10 à 100 m','100 à 500 m','Lieu-dit','Localité')
+localisation_floutage;Niveau de diffusion de la localisation souhaité par l’auteur de l’observation - ('précise', 'localité', '10x10km') _ correspondant à floutage avec : Oui = localité, 10x10 Non = précise, NULL
+date_observation;
+date_creation;
+date_modification;
+date_transmission;Date à laquelle la donnée a été rendue publique par l’auteur de l’observation
+programme;Nom du programme dans le cadre duquel l’observation a été saisie
+commentaire;Notes de l’auteur de l’observation
+spontaneite;Statut connu ou présumé par l’auteur de l’observation du spécimen ou de la population observée : cultivé ou spontané (0, 1)
+observateur;Nom de l’observateur (si null, c’est l’auteur de l’observation)
+observateur_structure;Structure dans le cadre de laquelle l’observation a été faite
+type_donnees;Type de donnée (Correspond au champ Statut de la source avec  Te= observation de terrain Co = donnée d’herbier Li = issue de la bibliographie (avec refBiblio = biblio)
+biblio;Source bibliographique éventuelle
+determinateur;Nom de la personne ayant fait ou aider à l’identification taxonomique
+source;Outil utilisé pour la saisie ('CEL','widget','PlantNet','autre')
+images;URL des images liées à l’observation
+stationExposition;Exposition de la pente : Plat, S (sud), N (Nord), E (Est), O (Ouest), S-O (Sud-Ouest)..
+stationPente;pourcentage de la pente
+abondance;fourchette du nombre d'individus
+individusNombre;nombre d'individus
+phenologie;stade phénologique
+releveType;Acquisition d'une nouvelle donnée ou confirmation d'une donnée historique : nouveau / confirmation
+determinationSource;flore utilisée pour la détermination
+arbreRemarquableAge;Âge estimé de l’arbre observé ('Très vieux', 'Vieux', 'Adulte') 
+arbreRemarquableCirconference;Circonférence précise du tronc à 1,30m du sol si mesurée (en mètres)
+arbreRemarquableClasseCirconference;Circonférence estimée du tronc à 1,30m du sol (en mètres) ('Inférieure à 1 mètre','Entre 1 et 2 mètres','Entre 2 et 3 mètres','Supérieure à 3m','Je ne sais pas')
+arbreRemarquableEsthetique;Intérêt esthétique que présente l’arbre
+arbreRemarquableHauteur;Hauteur de l’arbre (en mètres)
+arbreRemarquableHauteurPrecision;Mode d’évaluation de la hauteur ('Evaluée', 'Mesurée')
+arbreRemarquableHistorique;Intérêt historique ou patrimonial de l’arbre
+arbreRemarquablePresenceCavite;Présence de cavité sur l’arbre ('Absence', 'Présence de cavité', 'Je ne sais pas')
+arbreRemarquableRemarquabilite;Degré de remarquabilité de l’arbre ('Arbre exceptionnel', 'Arbre remarquable', 'Arbre d’intérêt local')
+arbreRemarquableRemarquable;Raisons pour lesquelles l’individu semble remarquable
+arbreRemarquableSante;Etat de santé de l’arbre ('En très bonne santé', 'En bonne santé', 'Etat moyen', 'Fin de vie')
+arbreRemarquableSituation;Contexte, situation dans laquelle on trouve l’arbre
+arbreTetardClasseCirconferenceA1m;Circonférence estimée du tronc à 1m du sol (en mètres) ('< 0,5 m','0,5 à 2 m','2 à 3 m','> 3 m')
+arbreTetardEntretienCoupe;"Type d’entretien de l’arbre et périodicité des coupes ('Coupe récente (< 5 ans ; diamètre des branches < 10 cm) ', 'Ancienne (5 à 10 ans ; diamètre des branches entre 10 et 15 cm)', 'Non entretenu (diamètre des branches > 15 cm)')"
+arbreTetardEtatSanitaire;Etat de santé de l’arbre ('Mort', 'Dépérissant', 'Bon état général')
+arbreTetardFormation;Indique si l’arbre est seul ou fait partie d’un alignement ('Arbres d’alignement','Arbre isolé')
+arbreTetardHauteurTete;Hauteur de la tête de l’arbre (en mètres) ('< 1,5 m', '1,5 à 3m', '> 3 m')
+arbreTetardPresenceCavite;Présence de cavité sur l’arbre ('Aucune', 'Oui, petites', 'Oui, grandes')
+arbreTetardAligneNbre;Nombre d’arbres alignés
+arbreTetardPresenceSp;Espèces présentes sur l'arbre (végétale ou animale)
+arbreTetardTailleType;Type de taille de l’arbre ('Trogne','Tête de chat','Emonde','Autre')
+TypeDeCulture;Type de culture environnant la plante observée ('Céréale', 'Friche', 'Maraichère', 'Vigne', 'Verger', 'Plantes à parfum, aromatiques et médicinales', 'Autre')
+TypeDeCultureDetails;Plante cultivée sur le champ
+ZoneDuChamp;Zone(s) du champ où l’espèce est présente ('Bord du champ', 'Coeur du champ', 'Zone délaissée')
+Adresse;Nom de la rue où a été effectué le relevé
+coteRue;Côté de la rue où a été effectué le relevé ('Pair', 'Impair', 'Les deux')
+LatitudeDebutRue;Coordonnées du point de début du relevé
+LatitudeFinRue;Coordonnées du point de fin du relevé
+LongitudeDebutRue;Coordonnées du point de début du relevé
+LongitudeFinRue;Coordonnées du point de fin du relevé
