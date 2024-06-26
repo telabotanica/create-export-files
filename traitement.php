@@ -1,12 +1,13 @@
 <?php
 //create_files_with_complementary_fields("arbresRemarquables","arbres-rem_all_bdtfx.csv","A2380F40-1496-20E0-E053-2614A8C06E36");
 //create_files_with_complementary_fields("arbresTetards","arbres-tetards_all_bdtfx.csv","A2380F40-1495-20E0-E053-2614A8C06E36");
-create_files_with_complementary_fields("sauvagesDeMaRue","sauvages_all_bdtfx.csv","A2224CDB-4CBB-103B-E053-2614A8C04C7B");
+//create_files_with_complementary_fields("sauvagesDeMaRue","sauvages_all_bdtfx.csv","A2224CDB-4CBB-103B-E053-2614A8C04C7B");
 //create_files("plantNet","cel_export_total_plantnet_taxref.csv","A2413E96-351B-0DE0-E053-2614A8C0C52B");
 //create_files_with_complementary_fields("messicoles","messicoles_all_bdtfx.csv","A2413E96-3518-0DE0-E053-2614A8C0C52B");
 //create_files_with_complementary_fields("missionsFlore","missions_flore.csv","A2413E96-3518-0DE0-E053-2614A8C0C52B");
+//create_files("horsProgrammes","cel_export_hors-programmes.csv","A2224CDB-4CBA-103B-E053-2614A8C04C7B");
 /**
- * Créée les fichiers normées par programme sans champs complémentaires
+ * Crée les fichiers normées par programme sans champs complémentaires
  * @param {String} $programme : nomDuProgramme
  * @param {String} $nom_fichier : nom_du_fichier_export.csv
  * @param {String} $id_jdd : uuid du jeu de de données (fiche INPN) 
@@ -31,7 +32,7 @@ function create_files($programme,$nom_fichier,$id_jdd){
             $parts= explode(";",$line);
             
             if ($cpt ===0){
-                //var_dump($parts);
+               
                 for($i=0;$i<count($parts);$i++){
                     
                     $parts[$i]=str_replace('"','',$parts[$i]);
@@ -61,7 +62,7 @@ function create_files($programme,$nom_fichier,$id_jdd){
                 
 
             }else{
-                //var_dump($parts);
+               
                 $id_evt = guidv4();
                 $id_suj = guidv4();
                 for($i=0;$i<count($parts);$i++){
@@ -123,13 +124,15 @@ function create_files($programme,$nom_fichier,$id_jdd){
 
                 $idObs = $parts[$array_positions_suj[0]];
                 $nom = $parts[$array_positions_suj[1]];
-                $nom_req = str_replace(" ","%20",$nom);
-                $nom_req = str_replace("[","%5B",$nom_req);
-                $nom_req = str_replace("]","%5D",$nom_req);
-                $cdNom = $parts[$array_positions_suj[2]];
-                $url = "https://taxref.mnhn.fr/api/taxa/fuzzyMatch?term=$nom_req";
+                $nom_req = str_replace(" × "," ",$nom);
+                $nom_req = str_replace(" ","%20",$nom_req);
+                $name=explode("[",$nom_req)[0];
                 
-                if ($cdNom === "NULL"){
+                $cdNom = $parts[$array_positions_suj[2]];
+                $url = "https://taxref.mnhn.fr/api/taxa/fuzzyMatch?term='$name'";
+                
+                if ($cdNom === "NULL" AND !str_contains($name,"aceae")){
+             
                     $curl = curl_init( $url );
                     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                     $response = curl_exec( $curl );
@@ -182,32 +185,28 @@ function create_files($programme,$nom_fichier,$id_jdd){
         fclose($fichier);
         $fp = fopen("Evenement_$programme.csv", 'wb');
         foreach ($array_evt as $line) {
-            // though CSV stands for "comma separated value"
-            // in many countries (including France) separator is ";"
+            
             fputcsv($fp, $line,";");
         }
         fclose($fp);
 
         $fp = fopen("SujetObservation_$programme.csv", 'wb');
         foreach ($array_suj as $line) {
-            // though CSV stands for "comma separated value"
-            // in many countries (including France) separator is ";"
+           
             fputcsv($fp, $line,";");
         }
         fclose($fp);
 
         $fp = fopen("DescriptifSujet_$programme.csv", 'wb');
         foreach ($array_descr as $line) {
-            // though CSV stands for "comma separated value"
-            // in many countries (including France) separator is ";"
+           
             fputcsv($fp, $line,";");
         }
         fclose($fp);
 
         $fp = fopen("AttributsAdditionnels_$programme.csv", 'wb');
         foreach ($array_attribut as $line) {
-            // though CSV stands for "comma separated value"
-            // in many countries (including France) separator is ";"
+          
             fputcsv($fp, $line,";");
         }
         fclose($fp);
@@ -215,7 +214,7 @@ function create_files($programme,$nom_fichier,$id_jdd){
 }
 
 /**
- * Créée les fichiers normées par programme avec champs complémentaires
+ * Crée les fichiers normées par programme avec champs complémentaires
  * @param {String} $programme : nomDuProgramme
  * @param {String} $nom_fichier : nom_du_fichier_export_csv
  * @param {String} $id_jdd : uuid du jeu de de données (fiche INPN) 
@@ -280,18 +279,10 @@ function create_files_with_complementary_fields($programme,$nom_fichier,$id_jdd)
                 array_push($array_descr,$ligne_descr);
                 array_push($array_attribut,$ligne_attribut);
 
-              /*   var_dump($array_positions_evt);
-                var_dump($array_positions_suj);
-                var_dump($array_positions_descr);
-                var_dump($array_positions_attribut);
-                var_dump($nb_columns); */
             }else{
                 
                 
                 $parts= explode(";",$line,$nb_columns);
-                /* if($nb_columns>count($parts)){
-                    die();
-                } */
                 $id_evt = guidv4();
                 $id_suj = guidv4();
                 for($i=0;$i<count($parts);$i++){
@@ -350,10 +341,7 @@ function create_files_with_complementary_fields($programme,$nom_fichier,$id_jdd)
                                         array_push($ligne_arr_attribut,$nom_champ);
                                         foreach($champs_file as $ligne){
                                             $line_parts=explode(";",$ligne);
-                                            var_dump($line_parts);
                                             $line_name=trim($line_parts[0]);
-                                            var_dump($line_name);
-                                            var_dump($nom_champ);
                                             if ($line_name === $nom_champ){
                                                 
                                                 $def = $line_parts[1];
@@ -414,7 +402,7 @@ function create_files_with_complementary_fields($programme,$nom_fichier,$id_jdd)
                 $url = "https://taxref.mnhn.fr/api/taxa/fuzzyMatch?term='$name'";
                 
                 if ($cdNom === "NULL" AND !str_contains($name,"aceae")){
-                    var_dump($cpt." ".$url);
+                 
                     $curl = curl_init( $url );
                     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                     $response = curl_exec( $curl );
@@ -460,39 +448,34 @@ function create_files_with_complementary_fields($programme,$nom_fichier,$id_jdd)
 
             }
             
-            
             $cpt++;
         }
 
         fclose($fichier);
         $fp = fopen("Evenement_$programme.csv", 'wb');
         foreach ($array_evt as $line) {
-            // though CSV stands for "comma separated value"
-            // in many countries (including France) separator is ";"
+           
             fputcsv($fp, $line,";");
         }
         fclose($fp);
 
         $fp = fopen("SujetObservation_$programme.csv", 'wb');
         foreach ($array_suj as $line) {
-            // though CSV stands for "comma separated value"
-            // in many countries (including France) separator is ";"
+            
             fputcsv($fp, $line,";");
         }
         fclose($fp);
 
         $fp = fopen("DescriptifSujet_$programme.csv", 'wb');
         foreach ($array_descr as $line) {
-            // though CSV stands for "comma separated value"
-            // in many countries (including France) separator is ";"
+            
             fputcsv($fp, $line,";");
         }
         fclose($fp);
 
         $fp = fopen("AttributsAdditionnels_$programme.csv", 'wb');
         foreach ($array_attribut as $line) {
-            // though CSV stands for "comma separated value"
-            // in many countries (including France) separator is ";"
+          
             fputcsv($fp, $line,";");
         }
         fclose($fp);
