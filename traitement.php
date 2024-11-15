@@ -4,8 +4,10 @@
 //create_files_with_complementary_fields("sauvagesDeMaRue","sauvages_all_bdtfx.csv","A2224CDB-4CBB-103B-E053-2614A8C04C7B");
 //create_files("plantNet","cel_export_total_plantnet_taxref.csv","A2413E96-351B-0DE0-E053-2614A8C0C52B");
 //create_files_with_complementary_fields("messicoles","messicoles_all_bdtfx.csv","A2413E96-3518-0DE0-E053-2614A8C0C52B");
-//create_files_with_complementary_fields("missionsFlore","missions_flore.csv","A2413E96-3518-0DE0-E053-2614A8C0C52B");
+//create_files_with_complementary_fields("missionsFlore","missions_flore.csv","A2413E96-3519-0DE0-E053-2614A8C0C52B");
 //create_files("horsProgrammes","cel_export_hors-programmes.csv","A2224CDB-4CBA-103B-E053-2614A8C04C7B");
+//create_files("streets","tb_streets.csv","1C303187-EA1C-967C-E063-0514A8C076CD");
+create_files("lichensGo","lichens_go.csv","1C302094-B692-16B4-E063-0514A8C06B4D");
 /**
  * Crée les fichiers normées par programme sans champs complémentaires
  * @param {String} $programme : nomDuProgramme
@@ -132,7 +134,7 @@ function create_files($programme,$nom_fichier,$id_jdd){
                 $url = "https://taxref.mnhn.fr/api/taxa/fuzzyMatch?term='$name'";
                 
                 if ($cdNom === "NULL" AND !str_contains($name,"aceae")){
-             
+                    var_dump($url);
                     $curl = curl_init( $url );
                     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                     $response = curl_exec( $curl );
